@@ -1,4 +1,4 @@
-#User Management System
+# User Management System
 _______________________
 # Authors
 
@@ -6,9 +6,9 @@ _______________________
 ___________________________________________________________________________________________________
 # Description
 
-In this project I build a User management system
-We are able to peform CRUD operations
-We can view all users in the database
+## In this project I build a User management system
+. This application enables us to create, read, update, and delete users
+. We can view all users in the database
 ___________________________________________________________________________________________________
 #Technologies
 
