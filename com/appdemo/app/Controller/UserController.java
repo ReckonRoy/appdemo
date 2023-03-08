@@ -16,6 +16,8 @@ import org.springframework.web.client.ResourceAccessException;
 import com.appdemo.app.domain.User;
 import com.appdemo.app.domain.UserRepository;
 
+import exceptions.ResourceNotFoundException;
+
 @RestController
 public class UserController {
 	
@@ -37,10 +39,36 @@ public class UserController {
 	public ResponseEntity<User> getUser(@PathVariable(value = "id") Long id) throws ResourceAccessException{
 		User user = this.uRepository.findById(id).orElseThrow(
 		
-			()-> new ResourceAccessException("User Not Found")
+			() -> new ResourceNotFoundException("User Not Found")
 		);
 		
 		return ResponseEntity.ok().body(user);
+	}
+	
+	@RequestMapping(value="/user/{id}", method=RequestMethod.PUT)
+	public User updateUser(@RequestBody User newUser, @PathVariable(value = "id") Long id) {
+		return this.uRepository.findById(id)
+				.map( user -> {
+					user.setName(newUser.getName());
+					user.setSurname(newUser.getSurname());
+					user.setEmail(newUser.getEmail());
+					user.setUsername(newUser.getUsername());
+					user.setPassword(newUser.getPassword());
+					return this.uRepository.save(user);
+				}).orElseGet(()->{
+					newUser.setId(id);
+					return this.uRepository.save(newUser);
+				});
+	}	
+	
+	@RequestMapping(value="/user/{id}", method=RequestMethod.DELETE)
+	public ResponseEntity<Void> removeUser(@PathVariable(value="id") Long id) {
+		User user = this.uRepository.findById(id).orElseThrow(
+				() -> new ResourceNotFoundException("User not found: " + id)
+					);
+		
+		this.uRepository.delete(user);
+		return ResponseEntity.ok().build();
 	}
 	
 }
