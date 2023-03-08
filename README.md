@@ -11,7 +11,7 @@ ________________________________________________________________________________
 
  This application enables us to create, read, update, and delete users
 
- We can view all users in the database
+ 
 ___________________________________________________________________________________________________
 # Technologies
 
@@ -28,6 +28,8 @@ Postman
 JUnit testing
 
 ReactJS
+
+ThymeLeaf
 
 CSS
 ___________________________________________________________________________________________________
