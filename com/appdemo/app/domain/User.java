@@ -11,6 +11,10 @@ public class User {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
 	
+	public void setId(Long id) {
+		this.id = id;
+	}
+
 	private String name;
 	private String surname;
 	private String email;
